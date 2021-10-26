@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:atom="http://www.w3.org/Atom">
+  <Document id="ID">
+    <name></name>
+    <visibility>1</visibility>
+    <open>0</open>
+    <atom:author>
+      <atom:name></atom:name>!
+      <atom:uri></atom:uri>
+      <atom:email></atom:email>
+    </atom:author>
+    <atom:link href=""/>
+    <description></description>
+    <TimeStamp>
+      <when></when>
+    </TimeStamp>
+  </Document>
+
+  <Folder>
+    <name></name>
+    <visibility>1</visibility>
+    <open>0</open>
+    <atom:author>
+      <atom:name></atom:name>!
+      <atom:uri></atom:uri>
+      <atom:email></atom:email>
+    </atom:author>
+    <atom:link href=""/>
+    <description></description>
+    <TimeStamp>
+      <when></when>
+    </TimeStamp>
+  </Folder>
+
+  <!-- Geometry -->
+  <Point id="ID">
+    <extrude>0</extrude>
+    <altitudeMode>clampToGround</altitudeMode> clampToGround, relativeToGround, absolute
+    <coordinates>lat,lon[,alt]</coordinates>
+  </Point>
+
+  <LineString id="ID">
+    <extrude>0</extrude>
+    <tassellate>0</tassellate>
+    <altitudeMode>clampToGround</altitudeMode>
+    <!-- or gx:altitudeMode: clampToSeaFloor, relativeToSeaFloor -->
+    <gx:drawOrder>0</gx:drawOrder>
+    <coordinates></coordinates>
+  </LineString>
+
+  <LinearRing>
+    <gx:altitudeOffset>0</gx:altitudeOffset>
+    <!-- same as LineString -->
+  </LinearRing>
+</kml>

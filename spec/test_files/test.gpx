@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx version="1.1" creator="engim - www.github.com/engim-eu" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>ZONA 2</name>
+    <desc>Description</desc>
+    <author>
+      <name>Engim Srl</name>
+    </author>
+    <link href="https://www.engim.eu"/>
+    <time>2021-07-30T12:44:48.684</time>
+  </metadata>
+  <wpt lat="11.050239" lon="44.672737">
+    <name>Lello</name>
+  </wpt>
+  <wpt lat="11.050239" lon="44.672737">
+  </wpt>
+  <trk>
+    <name>track 1</name>
+    <desc>Che bella traccia, wow!</desc>
+    <link href="https://www.google.com"/>
+    <trkseg></trkseg>
+    <trkseg></trkseg>
+  </trk>
+  <trk>
+    <name>TRACK ZONA 2</name>
+    <number>5</number>
+    <type>panoramaRoute</type>
+    <trkseg>
+      <trkpt lat="46.075041" lon="11.871986">
+        <ele>764.3</ele>
+        <name>point 1</name>
+        <link href="https://www.engim.eu/"/>
+      </trkpt>
+      <trkpt lat="46.04676" lon="11.914161">
+        <ele>335.0</ele>
+        <desc>beautiful point</desc>
+      </trkpt>
+      <trkpt lat="46.046712" lon="11.914186">
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

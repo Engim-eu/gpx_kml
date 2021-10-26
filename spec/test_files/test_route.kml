@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:atom="http://www.w3.org/Atom"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>ZONA 1</name>
+
+    <atom:author>
+      <atom:name>Engim Srl</atom:name>
+    </atom:author>
+
+    <atom:link href="https://www.engim.eu"/>
+
+    <TimeStamp>
+      <when>2021-09-22T12:31:11.420</when>
+    </TimeStamp>
+
+
+    <description>
+      <![CDATA[<br/><p> </p><p><br/>Converted using <b><a href='http://gpx2kml.com' title='Go to gpx2kml.com'>gpx2kml.com</a></b></p><br/>]]></description>
+    <visibility>1</visibility>
+    <open>1</open>
+
+    <Style id="red">
+      <LineStyle>
+        <color>C81400FF</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_red">
+      <LineStyle>
+        <color>961400FF</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="green">
+      <LineStyle>
+        <color>C878FF00</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_green">
+      <LineStyle>
+        <color>9678FF00</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="blue">
+      <LineStyle>
+        <color>C8FF7800</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_blue">
+      <LineStyle>
+        <color>96FF7800</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="cyan">
+      <LineStyle>
+        <color>C8F0FF14</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_cyan">
+      <LineStyle>
+        <color>96F0FF14</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="orange">
+      <LineStyle>
+        <color>C81478FF</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_orange">
+      <LineStyle>
+        <color>961478FF</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="dark_green">
+      <LineStyle>
+        <color>C8008C14</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_dark_green">
+      <LineStyle>
+        <color>96008C14</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="purple">
+      <LineStyle>
+        <color>C8FF7878</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_purple">
+      <LineStyle>
+        <color>96FF7878</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="pink">
+      <LineStyle>
+        <color>C8A078F0</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_pink">
+      <LineStyle>
+        <color>96A078F0</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="brown">
+      <LineStyle>
+        <color>C8143C96</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_brown">
+      <LineStyle>
+        <color>96143C96</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="dark_blue">
+      <LineStyle>
+        <color>C8F01414</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="route_dark_blue">
+      <LineStyle>
+        <color>96F01414</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+
+
+    <Folder>
+      <name>Tracks</name>
+      <description>A list of tracks</description>
+      <visibility>1</visibility>
+      <open>0</open>
+
+      <Placemark>
+        <visibility>0</visibility>
+        <open>0</open>
+        <styleUrl>#red</styleUrl>
+        <name>ZONA 2</name>
+        <description>Macroarea Nord / Zona 1
+          - Track no. 1
+        </description>
+        <LinearRing>
+          <extrude>true</extrude>
+          <tessellate>true</tessellate>
+          <altitudeMode>clampToGround</altitudeMode>
+          <coordinates>
+            11.883245,46.059044,590.9 11.902367,46.050056,459.81405
+          </coordinates>
+        </LinearRing>
+        <Point>
+          <coordinates>11.03294,49.01324,306.8</coordinates>
+        </Point>
+        <Point>
+          <coordinates>11.03294,49.01324</coordinates>
+        </Point>
+      </Placemark>
+
+    </Folder>
+
+    <LookAt>
+      <longitude>11.899897</longitude>
+      <latitude>46.0594065</latitude>
+      <altitude>0</altitude>
+      <heading>0</heading>
+      <tilt>45</tilt>
+      <range>1545</range>
+      <altitudeMode>clampToGround</altitudeMode>
+    </LookAt>
+  </Document>
+</kml>
