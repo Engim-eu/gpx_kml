@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gpx_kml (0.0.0)
+    gpx_kml (0.0.1)
       nokogiri (~> 1.12.0)
       rake (~> 12.0)
 
@@ -20,12 +20,10 @@ GEM
       activesupport (>= 5.0.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    mini_portile2 (2.6.1)
     minitest (5.14.4)
-    nokogiri (1.12.5)
-      mini_portile2 (~> 2.6.1)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
-    racc (1.5.2)
+    racc (1.6.0)
     rake (12.3.3)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -50,7 +48,6 @@ PLATFORMS
 DEPENDENCIES
   factory_bot (~> 6.2)
   gpx_kml!
-  rake (~> 12.0)
   rspec (~> 3.0)
 
 BUNDLED WITH
