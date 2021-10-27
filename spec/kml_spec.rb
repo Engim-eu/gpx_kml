@@ -36,9 +36,6 @@ RSpec.describe 'Kml' do
 
     it 'returns the number of tracks in the kml' do
       expect(kml.points_length).to be 2
-      puts 'from here'
-      GPXKML::GpxKml.kml_to_gpx("/home/angelo/attempt1/test.kml", '/home/angelo/attempt1')
-      GPXKML::GpxKml.gpx_to_kml("/home/angelo/attempt1/test_route.gpx", '/home/angelo/attempt1')
     end
   end
 end
