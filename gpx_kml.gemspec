@@ -2,7 +2,7 @@ require_relative 'lib/gpx_kml/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'gpx_kml'
-  spec.version       = '1.0.0'
+  spec.version       = GPXKML::VERSION
   spec.authors       = ['Angelo Terzi']
   spec.email         = ['info@engim.eu']
 
