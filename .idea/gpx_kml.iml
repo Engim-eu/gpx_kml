@@ -17,10 +17,9 @@
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.4.4, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_bot (v6.2.0, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.8.10, RVM: ruby-2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="mini_portile2 (v2.6.1, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.14.4, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.12.5, RVM: ruby-2.7.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="racc (v1.5.2, RVM: ruby-2.7.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="racc (v1.6.0, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v12.3.3, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec (v3.10.0, RVM: ruby-2.7.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.10.1, RVM: ruby-2.7.2) [gem]" level="application" />
@@ -34,16 +33,16 @@
     <option name="myRootTask">
       <RakeTaskImpl id="rake">
         <subtasks>
-          <RakeTaskImpl description="Build gpx_kml-0.0.0.gem into the pkg directory" fullCommand="build" id="build" />
+          <RakeTaskImpl description="Build gpx_kml-0.0.1.gem into the pkg directory" fullCommand="build" id="build" />
           <RakeTaskImpl description="Remove any temporary products" fullCommand="clean" id="clean" />
           <RakeTaskImpl description="Remove any generated files" fullCommand="clobber" id="clobber" />
-          <RakeTaskImpl description="Build and install gpx_kml-0.0.0.gem into system gems" fullCommand="install" id="install" />
+          <RakeTaskImpl description="Build and install gpx_kml-0.0.1.gem into system gems" fullCommand="install" id="install" />
           <RakeTaskImpl id="install">
             <subtasks>
-              <RakeTaskImpl description="Build and install gpx_kml-0.0.0.gem into system gems without network access" fullCommand="install:local" id="local" />
+              <RakeTaskImpl description="Build and install gpx_kml-0.0.1.gem into system gems without network access" fullCommand="install:local" id="local" />
             </subtasks>
           </RakeTaskImpl>
-          <RakeTaskImpl description="Create tag v0.0.0 and build and push gpx_kml-0.0.0.gem to TODO: Set to 'https://mygemserver.com'" fullCommand="release[remote]" id="release[remote]" />
+          <RakeTaskImpl description="Create tag v0.0.1 and build and push gpx_kml-0.0.1.gem to https://rubygems.com'" fullCommand="release[remote]" id="release[remote]" />
           <RakeTaskImpl description="Run RSpec code examples" fullCommand="spec" id="spec" />
           <RakeTaskImpl description="" fullCommand="default" id="default" />
           <RakeTaskImpl description="" fullCommand="release" id="release" />

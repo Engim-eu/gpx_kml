@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Gem to convert .gpx into .kml and back'
   spec.description   = 'This gem adds the capability to convert GPS Exchange Format (GPX) to Keyhole Markup Language (KML) and viceversa'
-  spec.homepage      = 'https://www.github.com/engim-eu/'
+  spec.homepage      = 'https://www.github.com/engim-eu/gpx_kml'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
 
   spec.metadata['allowed_push_host'] = "https://rubygems.org"
