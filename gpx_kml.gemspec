@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://www.github.com/engim-eu/gpx_kml'
-  spec.metadata['changelog_uri'] = 'https://www.github.com/engim-eu/gpx_kml/CHANGELOG.md'
+  spec.metadata['changelog_uri'] = 'https://www.github.com/engim-eu/gpx_kml/blob/master/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
