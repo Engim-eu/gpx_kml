@@ -1,0 +1,2 @@
+- v 0.0.2: corrected gem Homepage
+- v 0.0.1: release
