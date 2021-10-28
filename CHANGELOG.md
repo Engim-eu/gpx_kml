@@ -1,4 +1,6 @@
 ### V 0.1.x
+- v 0.1.1:
+  - fixed critical bug on output file
 - v 0.1.0: 
   - fixed changelog link in rubygems.org
   - removed .idea directory in the project

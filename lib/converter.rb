@@ -34,7 +34,7 @@ module CONVERTER
         end
       end
       name = "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{gpx.file_name[0..-5]}.kml"
-      f = File.open("#{output_path}/#{name}", 'w')
+      f = File.open(name.to_s, 'w')
       f.write(kml.to_xml)
       f.close
       name
@@ -59,7 +59,7 @@ module CONVERTER
         end
       end
       name = "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{kml.file_name[0..-5]}.gpx"
-      f = File.open("#{output_path}/#{name}", 'w')
+      f = File.open(name.to_s, 'w')
       f.write(gpx.to_xml)
       f.close
       name
@@ -138,8 +138,8 @@ module CONVERTER
         kml.points.each do |p|
           next if p.nil?
 
-          xml.wpt('lat': "#{p.latitude}", 'lon': "#{p.longitude}") do
-            xml.ele("#{p.elevation}") unless p.elevation.nil? || p.elevation.empty?
+          xml.wpt('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
+            xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
             xml.name(p.name) unless p.name.nil? || p.name.empty?
             xml.desc("author = #{p.author}") unless p.author.nil? || p.author.empty?
             xml.link('href': p.link) unless p.link.nil? || p.link.empty?
@@ -160,8 +160,8 @@ module CONVERTER
             r.points.each do |p|
               next if p.nil?
 
-              xml.rtept('lat': "#{p.latitude}", 'lon': "#{p.longitude}") do
-                xml.ele("#{p.elevation}") unless p.elevation.nil? || p.elevation.empty?
+              xml.rtept('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
+                xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
                 xml.desc("author = #{p.author}") unless p.author.nil? || p.author.empty?
                 xml.link('href': p.link) unless p.link.nil? || p.link.empty?
               end
@@ -184,8 +184,8 @@ module CONVERTER
               t.points.each do |p|
                 next if p.nil?
 
-                xml.trkpt('lat': "#{p.latitude}", 'lon': "#{p.longitude}") do
-                  xml.ele("#{p.elevation}") unless p.elevation.nil? || p.elevation.empty?
+                xml.trkpt('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
+                  xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
                   xml.desc("author = #{p.author}") unless p.author.nil? || p.author.empty?
                   xml.link('href': p.link) unless p.link.nil? || p.link.empty?
                 end
