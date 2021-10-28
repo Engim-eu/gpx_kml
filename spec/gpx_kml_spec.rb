@@ -4,6 +4,6 @@
 
 RSpec.describe GPXKML::GpxKml do
   it 'has a version number' do
-    expect(GPXKML::VERSION).to be '0.0.0'
+    expect(GPXKML::VERSION).to be '0.0.3'
   end
 end
