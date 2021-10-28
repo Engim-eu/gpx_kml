@@ -33,7 +33,7 @@ module CONVERTER
           end
         end
       end
-      name = "#{Time.now.strftime('%Y%m%d%H%M%S')}_#{gpx.file_name[0..-5]}.kml"
+      name = "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{gpx.file_name[0..-5]}.kml"
       f = File.open("#{output_path}/#{name}", 'w')
       f.write(kml.to_xml)
       f.close
@@ -58,7 +58,7 @@ module CONVERTER
           gpx_tracks(xml, kml)
         end
       end
-      name = "#{Time.now.strftime('%Y%m%d%H%M%S')}_#{kml.file_name[0..-5]}.gpx"
+      name = "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{kml.file_name[0..-5]}.gpx"
       f = File.open("#{output_path}/#{name}", 'w')
       f.write(gpx.to_xml)
       f.close
