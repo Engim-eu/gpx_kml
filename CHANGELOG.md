@@ -1,4 +1,6 @@
 ### V 0.1.x
+- v 0.1.2:
+  - fixed version tests, AGAIN
 - v 0.1.1:
   - fixed critical bug on output file
 - v 0.1.0: 
