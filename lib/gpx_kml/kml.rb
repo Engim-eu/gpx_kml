@@ -30,7 +30,9 @@ module KML
     attr_reader :points, :routes, :tracks
 
     def valid?
-      tracks? || routes? || points?
+      return nil if @kml.nil?
+
+      !@kml.xpath('/xmlns:kml').empty? && (tracks? || routes? || points?)
     end
 
     def routes?
@@ -54,9 +56,7 @@ module KML
     private
 
     def correct_path?(path)
-      return true if path.instance_of?(String) && (path.end_with? '.kml')
-
-      false
+      path.instance_of?(String) && (path.end_with?('.kml') || path.end_with?('.xml') || !path.include?('.'))
     end
 
     def _tracks

@@ -35,7 +35,9 @@ module GPX
 
     # For a gpx file to be valid it must only have a waypoint, a route or a track
     def valid?
-      tracks? || routes? || points?
+      return nil if @gpx.nil?
+
+      !@gpx.xpath('/xmlns:gpx').empty? && (tracks? || routes? || points?)
     end
 
     def routes?
@@ -118,9 +120,7 @@ module GPX
     end
 
     def correct_path?(path)
-      return true if path.instance_of?(String) && (path.end_with? '.gpx')
-
-      false
+      path.instance_of?(String) && (path.end_with?('.gpx') || path.end_with?('.xml') || !path.include?('.'))
     end
 
     def alt_name
