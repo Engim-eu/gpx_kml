@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:atom="http://www.w3.org/Atom">
+  <Document>
+    <name>ZONA 2</name>
+    <visibility>1</visibility>
+    <open>0</open>
+    <atom:author>
+      <atom:name>Engim Srl</atom:name>
+    </atom:author>
+    <atom:link href="https://www.engim.eu"/>
+    <Point>
+      <extrude>0</extrude>
+      <altitudeMode>clampToGroud</altitudeMode>
+      <coordinates>11.050239,44.672737</coordinates>
+    </Point>
+    <Point>
+      <extrude>0</extrude>
+      <altitudeMode>clampToGroud</altitudeMode>
+      <coordinates>11.050239,44.672737</coordinates>
+    </Point>
+    <LineString>
+      <extrude>0</extrude>
+      <tassellate>0</tassellate>
+      <altitudeMode>clampToGroud</altitudeMode>
+      <coordinates/>
+    </LineString>
+    <LineString>
+      <extrude>0</extrude>
+      <tassellate>0</tassellate>
+      <altitudeMode>clampToGroud</altitudeMode>
+      <coordinates>46.075041,11.871986,764.3 46.04676,11.914161,335.0 46.046712,11.914186</coordinates>
+    </LineString>
+  </Document>
+</kml>
