@@ -1,14 +1,12 @@
 # GpxKml
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gpx_kml`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem adds the capability to convert GPS Exchange Format (GPX) files to Keyhole Markup Language (KML) files and viceversa
 
 ## Before using
 
 Please take note that this only converts essentials data for the gpx and kml files compatibility.
-However the gem doesn't just include the converter, it also transforms gpx files and kml files (only their track/route/point parts) into a Gpx/Kml file, which could be useful for a new fork or other uses.
-Just dig in deep, tests are present for everything you need, except the mere conversion.
+However the gem doesn't just include the converter, it also transforms gpx files and kml files (only their track/route/point parts) into a Gpx/Kml instance, which could be useful for new forks or other uses.
+Just dig in deep, tests are present for everything you need.
 
 ## Installation
 
@@ -28,12 +26,26 @@ Or install it yourself as:
 
 ## Usage
 
-To use it just ```require 'gpx_kml'``` in the script you need the converter and use either one of the following two functions:
+To use it just ```require 'gpx_kml'``` in the script you need the converter and perform the following actions:
+<br>
+Create an instance of the file you want to convert as follows:
+- ```gpx = GPXKML::GpxKml.new_gpx('file_path')``` for a gpx file
+- ```kml = GPXKML::GpxKml.new_kml('file_path')``` for a kml file
+<br><br>
 
-- ```GPXKML::GpxKml.kml_to_gpx('file_path', 'destination_path')```
-- ```GPXKML::GpxKml.gpx_to_kml('file_path', 'destination_path')```
+Now: you may want to check if the file you imported is actually a gpx or a kml.<br>
+You can do that by usign the ```gpx?``` &  ```kml?``` functions on the instance you just created:
+- ```GPXKML::GpxKml.gpx?(gpx)```
+- ```GPXKML::GpxKml.kml?(kml)```
 
-Note: destination_path must be a directory
+Note: this step is optional since the conversions method below do the same thing inside of themselves, but this method could turn out to be useful.
+<br><br>
+Now you can actually convert the instance to create the new file needed.<br>
+The function will return the entire path to the file just created!
+- ```path_of_the_new_file = GPXKML::GpxKml.kml_to_gpx('gpx', 'destination_path')```
+- ```path_of_the_new_file = GPXKML::GpxKml.gpx_to_kml('kml', 'destination_path')```
+
+IMPORTANT : ```destination_path``` must be a directory
 
 ## Development
 
