@@ -1,8 +1,15 @@
 ### V 0.1.x
+- v 0.1.3:
+  - changed usage & updated/fixed minor parts in documentation (README.md)
+  - added preconverted files and missing tests
+  - change in inputs for conversion functions: now they take in Gpx and Kml instances instead of file paths
+  - added new feature: now you can check whether a Gpx (or Kml) object imported an effective 'gpx' (or 'kml') file
+  - added new feature: now you can create Gpx and Kml objects from their respective files
+  - removed dependency factory_bot which ended up being unused
 - v 0.1.2:
   - fixed version tests, AGAIN
 - v 0.1.1:
-  - fixed critical bug on output file
+  - fixed critical bug on output file, path was wrong
 - v 0.1.0: 
   - fixed changelog link in rubygems.org
   - removed .idea directory in the project
