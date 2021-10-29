@@ -3,13 +3,11 @@
 module CONVERTER
   # Docu
   class Converter
-    def self.gpx_to_kml(gpx_path, output_path)
-      return unless File.directory?(output_path)
+    def self.gpx_to_kml(gpx, output_path)
+      return unless File.directory?(output_path) && gpx.is_a?(GPX::Gpx)
+      return nil unless gpx.gpx?
 
       output_path = output_path[0..-2] if output_path[-1].eql?('/')
-      gpx = GPXKML::Gpx.new(gpx_path)
-      return nil if gpx.nil? || !gpx.valid?
-
       kml = Nokogiri::XML::Builder.new do |xml|
         xml.kml('xmlns': 'http://www.opengis.net/kml/2.2', 'xmlns:gx': 'http://www.google.com/kml/ext/2.2',
                 'xmlns:atom': 'http://www.w3.org/Atom') do
@@ -33,20 +31,22 @@ module CONVERTER
           end
         end
       end
-      name = "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{gpx.file_name[0..-5]}.kml"
+      name = if gpx.file_name.end_with?('.gpx') || gpx.file_name.end_with?('.xml')
+               "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{gpx.file_name[0..-5]}.kml"
+             else
+               "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{gpx.file_name}.kml"
+             end
       f = File.open(name.to_s, 'w')
       f.write(kml.to_xml)
       f.close
       name
     end
 
-    def self.kml_to_gpx(kml_path, output_path)
-      return unless File.directory?(output_path)
+    def self.kml_to_gpx(kml, output_path)
+      return nil unless File.directory?(output_path) && kml.is_a?(KML::Kml)
+      return nil unless kml.kml?
 
       output_path = output_path[0..-2] if output_path[-1].eql?('/')
-      kml = GPXKML::Kml.new(kml_path)
-      return nil if kml.nil? || !kml.valid?
-
       gpx = Nokogiri::XML::Builder.new do |xml|
         xml.gpx('version': '1.1', 'creator': 'https://www.github.com/engim-eu/gpx_kml',
                 'xmlns': 'https://www.topografix.com/GPX/1/1', 'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance') do
@@ -58,14 +58,16 @@ module CONVERTER
           gpx_tracks(xml, kml)
         end
       end
-      name = "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{kml.file_name[0..-5]}.gpx"
+      name = if kml.file_name.end_with?('.kml') || kml.file_name.end_with?('.xml')
+               "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{kml.file_name[0..-5]}.gpx"
+             else
+               "#{output_path}/#{Time.now.strftime('%Y%m%d%H%M%S')}_#{kml.file_name}.gpx"
+             end
       f = File.open(name.to_s, 'w')
       f.write(gpx.to_xml)
       f.close
       name
     end
-
-    private
 
     def self.kml_routes(xml, gpx)
       if gpx.routes?
