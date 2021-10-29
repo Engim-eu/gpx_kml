@@ -6,8 +6,15 @@ RSpec.describe 'Kml' do
   include GPXKML
 
   let(:kml) { GPXKML::Kml.new("#{__dir__}/test_files/test.kml") }
+  let(:not_a_kml) { GPXKML::Kml.new("#{__dir__}/test_files/test.gpx") }
 
   context 'validity checks' do
+
+    it 'checks if the file is a kml' do
+      expect(kml.kml?).to be true
+      expect(not_a_kml.kml?).to be false
+    end
+
     it 'checks the presence of tracks' do
       expect(kml.tracks?).to be true
     end

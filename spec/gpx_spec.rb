@@ -6,10 +6,17 @@ RSpec.describe 'Gpx' do
   include GPXKML
 
   let(:gpx) { GPXKML::Gpx.new("#{__dir__}/test_files/test.gpx") }
+  let(:not_a_gpx) { GPXKML::Gpx.new("#{__dir__}/test_files/test.kml") }
   let(:empty_gpx) { GPXKML::Gpx.new("#{__dir__}/test_files/test_alt.gpx") }
   let(:invalid_gpx) { GPXKML::Gpx.new("#{__dir__}/test_files/test_invalid.gpx") }
 
   context 'validity checks' do
+
+    it 'checks if the file is a gpx' do
+      expect(gpx.gpx?).to be true
+      expect(not_a_gpx.gpx?).to be false
+    end
+
     it 'checks the absence of routes' do
       expect(gpx.routes?).to be false
     end
