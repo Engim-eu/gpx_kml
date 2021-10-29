@@ -33,11 +33,13 @@ module GPX
     # access in readonly to the quantity of points/routes/tracks in the gpx
     attr_reader :points_length, :routes_length, :tracks_length
 
+    def gpx?
+      !@gpx.nil? && !@gpx.xpath('/xmlns:gpx').empty?
+    end
+
     # For a gpx file to be valid it must only have a waypoint, a route or a track
     def valid?
-      return nil if @gpx.nil?
-
-      !@gpx.xpath('/xmlns:gpx').empty? && (tracks? || routes? || points?)
+      gpx? && (tracks? || routes? || points?)
     end
 
     def routes?

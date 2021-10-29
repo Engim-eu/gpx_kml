@@ -29,10 +29,12 @@ module KML
     # access data of the kml in readonly
     attr_reader :points, :routes, :tracks
 
-    def valid?
-      return nil if @kml.nil?
+    def kml?
+      !@kml.nil? && !@kml.xpath('/xmlns:kml').empty?
+    end
 
-      !@kml.xpath('/xmlns:kml').empty? && (tracks? || routes? || points?)
+    def valid?
+      kml? && (tracks? || routes? || points?)
     end
 
     def routes?
