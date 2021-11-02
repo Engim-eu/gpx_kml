@@ -1,5 +1,7 @@
 # GpxKml
 
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)
+
 This gem adds the capability to convert GPS Exchange Format (GPX) files to Keyhole Markup Language (KML) files and viceversa
 
 ## Before using
