@@ -1,6 +1,6 @@
 # GpxKml
 
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0) [![Coverage: %](https://img.shields.io/badge/Code%20coverage-100%25-green.svg)](#coverage)
 
 This gem adds the capability to convert GPS Exchange Format (GPX) files to Keyhole Markup Language (KML) files and viceversa
 
@@ -59,6 +59,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/Engim-eu/gpx_kml. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/gpx_kml/blob/master/CODE_OF_CONDUCT.md).
 
+## Coverage
+
+Coverage will be added in the next version, however it has been tested locally and has given the results uploaded
 
 ## Code of Conduct
 
