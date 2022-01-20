@@ -1,4 +1,8 @@
 ### V 0.1.x
+- v 0.1.4:
+  - fixed kml files generation
+  - fixed bug that swapped latitude and longitude in certain conversions from gpx to kml
+  - added code coverage for development env
 - v 0.1.3:
   - changed usage & updated/fixed minor parts in documentation (README.md)
   - added preconverted files and missing tests
