@@ -2,6 +2,10 @@
 
 require 'bundler/setup'
 require 'gpx_kml'
+require 'simplecov'
+
+
+SimpleCov.start
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

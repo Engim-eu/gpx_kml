@@ -36,6 +36,9 @@ Gem::Specification.new do |spec|
   # Gem testing
   spec.add_development_dependency 'rspec', '~>3.0'
 
+  # Test coverage
+  spec.add_development_dependency 'simplecov', '~>0.21.0'
+
   # spec.add_development_dependency 'factory_bot', '~>6.2'
   # factory_bot isn't really used
 end
