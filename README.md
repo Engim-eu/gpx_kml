@@ -61,7 +61,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Engim-
 
 ## Coverage
 
-Coverage will be added in the next version, however it has been tested locally and has given the results uploaded
+Coverage can be checked running `rake spec`. This command will generate the coverage files needed.
 
 ## Code of Conduct
 
