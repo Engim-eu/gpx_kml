@@ -15,21 +15,21 @@ RSpec.describe 'Point' do
 
   context 'retrieval of point information' do
     it 'retrieves longitude of the point' do
-      expect(point0k0p.latitude).to eq '11.03294'
-      expect(point0k1p.latitude).to eq '11.03294'
-      expect(point0t0p.latitude).to eq '11.883245'
-      expect(point1k0p.latitude).to eq '11.03294'
-      expect(point1k1p.latitude).to eq '11.03294'
-      expect(point0r0p.latitude).to eq '11.883245'
+      expect(point0k0p.longitude).to eq '11.03294'
+      expect(point0k1p.longitude).to eq '11.03294'
+      expect(point0t0p.longitude).to eq '11.883245'
+      expect(point1k0p.longitude).to eq '11.03294'
+      expect(point1k1p.longitude).to eq '11.03294'
+      expect(point0r0p.longitude).to eq '11.883245'
     end
 
     it 'retrieves latitude of the point' do
-      expect(point0k0p.longitude).to eq '49.01324'
-      expect(point0k1p.longitude).to eq '49.01324'
-      expect(point0t0p.longitude).to eq '46.059044'
-      expect(point1k0p.longitude).to eq '49.01324'
-      expect(point1k1p.longitude).to eq '49.01324'
-      expect(point0r0p.longitude).to eq '46.059044'
+      expect(point0k0p.latitude).to eq '49.01324'
+      expect(point0k1p.latitude).to eq '49.01324'
+      expect(point0t0p.latitude).to eq '46.059044'
+      expect(point1k0p.latitude).to eq '49.01324'
+      expect(point1k1p.latitude).to eq '49.01324'
+      expect(point0r0p.latitude).to eq '46.059044'
     end
 
     it 'retrieves elevation of the point' do

@@ -18,17 +18,21 @@
       <altitudeMode>clampToGroud</altitudeMode>
       <coordinates>11.050239,44.672737</coordinates>
     </Point>
-    <LineString>
-      <extrude>0</extrude>
-      <tassellate>0</tassellate>
-      <altitudeMode>clampToGroud</altitudeMode>
-      <coordinates/>
-    </LineString>
-    <LineString>
-      <extrude>0</extrude>
-      <tassellate>0</tassellate>
-      <altitudeMode>clampToGroud</altitudeMode>
-      <coordinates>46.075041,11.871986,764.3 46.04676,11.914161,335.0 46.046712,11.914186</coordinates>
-    </LineString>
+    <Placemark>
+      <LineString>
+        <extrude>0</extrude>
+        <tassellate>0</tassellate>
+        <altitudeMode>clampToGroud</altitudeMode>
+        <coordinates/>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <LineString>
+        <extrude>0</extrude>
+        <tassellate>0</tassellate>
+        <altitudeMode>clampToGroud</altitudeMode>
+        <coordinates>11.871986,46.075041,764.3 11.914161,46.04676,335.0 11.914186,46.046712</coordinates>
+      </LineString>
+    </Placemark>
   </Document>
 </kml>

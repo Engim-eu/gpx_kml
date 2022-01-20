@@ -16,8 +16,8 @@ module KML
 
       @father = father
       coord = coord.split(',')
-      @latitude = coord[0]
-      @longitude = coord[1]
+      @longitude = coord[0]
+      @latitude = coord[1]
       @elevation = coord[2] if coord.length == 3
       @node = node
       # Name is looked up in the ancestor of the node that compose this point

@@ -72,19 +72,21 @@ module CONVERTER
     def self.kml_routes(xml, gpx)
       if gpx.routes?
         gpx.routes.each do |r|
-          xml.LinearRing do
-            xml.extrude('0')
-            xml.tassellate('0')
-            xml.altitudeMode('clampToGroud')
-            s = ''
-            r.points.each do |p|
-              s = if p.elevation.nil? || p.elevation.empty?
-                    s + "#{p.latitude},#{p.longitude} "
-                  else
-                    s + "#{p.latitude},#{p.longitude},#{p.elevation} "
-                  end
+          xml.Placemark do
+            xml.LinearRing do
+              xml.extrude('0')
+              xml.tassellate('0')
+              xml.altitudeMode('clampToGroud')
+              s = ''
+              r.points.each do |p|
+                s = if p.elevation.nil? || p.elevation.empty?
+                      s + "#{p.longitude},#{p.latitude} "
+                    else
+                      s + "#{p.longitude},#{p.latitude},#{p.elevation} "
+                    end
+              end
+              xml.coordinates(s[0..-2])
             end
-            xml.coordinates(s[0..-2])
           end
         end
       end
@@ -93,27 +95,29 @@ module CONVERTER
     def self.kml_tracks(xml, gpx)
       if gpx.tracks?
         gpx.tracks.each do |t|
-          xml.LineString do
-            xml.extrude('0')
-            xml.tassellate('0')
-            xml.altitudeMode('clampToGroud')
-            s = ''
-            points = []
-            t.segments.each do |sg|
-              sg.points.each do |p|
-                points = points << p
+          xml.Placemark do
+            xml.LineString do
+              xml.extrude('0')
+              xml.tassellate('0')
+              xml.altitudeMode('clampToGroud')
+              s = ''
+              points = []
+              t.segments.each do |sg|
+                sg.points.each do |p|
+                  points = points << p
+                end
               end
-            end
-            points.each do |p|
-              next if p.nil?
+              points.each do |p|
+                next if p.nil?
 
-              s = if p.elevation.nil? || p.elevation.empty?
-                    s + "#{p.latitude},#{p.longitude} "
-                  else
-                    s + "#{p.latitude},#{p.longitude},#{p.elevation} "
-                  end
+                s = if p.elevation.nil? || p.elevation.empty?
+                      s + "#{p.longitude},#{p.latitude} "
+                    else
+                      s + "#{p.longitude},#{p.latitude},#{p.elevation} "
+                    end
+              end
+              xml.coordinates(s[0..-2])
             end
-            xml.coordinates(s[0..-2])
           end
         end
       end
@@ -126,9 +130,9 @@ module CONVERTER
             xml.extrude('0')
             xml.altitudeMode('clampToGroud')
             if p.elevation.nil? || p.elevation.empty?
-              xml.coordinates("#{p.latitude},#{p.longitude}")
+              xml.coordinates("#{p.longitude},#{p.latitude}")
             else
-              xml.coordinates("#{p.latitude},#{p.longitude},#{p.elevation}")
+              xml.coordinates("#{p.longitude},#{p.latitude},#{p.elevation}")
             end
           end
         end
