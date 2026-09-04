@@ -12,7 +12,7 @@ module KML
       re = Regexp.new('^ ?[0-9]+\.[0-9]+,[0-9]+\.[0-9]+(,[0-9]+\.[0-9]+)? ?$')
 
       return unless valid_father?(father) && re.match?(coord) && node.is_a?(Nokogiri::XML::Element)
-      return if node.xpath('self::*[self::xmlns:LineString or self::xmlns:Point or self::xmlns:LinearRing]').empty?
+      return if node.xpath('self::*[self::LineString or self::Point or self::LinearRing]').empty?
 
       @father = father
       coord = coord.split(',')
@@ -22,7 +22,7 @@ module KML
       @node = node
       # Name is looked up in the ancestor of the node that compose this point
       @name = _name
-      return if node.xpath('self::xmlns:Point').empty?
+      return if node.xpath('self::Point').empty?
 
       @author = _author
       @link = _link
@@ -34,8 +34,8 @@ module KML
 
     def _name
       elem = @node.xpath('.')
-      while elem.xpath('self::xmlns:kml').empty?
-        return elem.xpath('./xmlns:name/text()').to_s unless elem.xpath('./xmlns:name').empty?
+      while elem.xpath('self::kml').empty?
+        return elem.xpath('./name/text()').to_s unless elem.xpath('./name').empty?
 
         elem = elem.xpath('..')
       end
@@ -44,18 +44,18 @@ module KML
 
     def _author
       elem = @node.xpath('.')
-      while elem.xpath('self::xmlns:kml').empty?
+      while elem.xpath('self::kml').empty?
         elem = elem.xpath('..')
-        return elem.xpath('./atom:author/atom:name/text()').to_s unless elem.xpath('./atom:author').empty?
+        return elem.xpath('./author/name/text()').to_s unless elem.xpath('./author').empty?
       end
       ''
     end
 
     def _link
       elem = @node.xpath('.')
-      while elem.xpath('self::xmlns:kml').empty?
+      while elem.xpath('self::kml').empty?
         elem = elem.xpath('..')
-        return elem.xpath('./atom:link/@href').to_s unless elem.xpath('./atom:link').empty?
+        return elem.xpath('./link/@href').to_s unless elem.xpath('./link').empty?
       end
       ''
     end

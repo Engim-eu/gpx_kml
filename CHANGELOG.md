@@ -1,4 +1,8 @@
 ### V 0.1.x
+- v 0.1.5:
+  - fixed Nokogiri XPath namespace error: namespaces are now stripped after parsing and the 'xmlns:' and 'atom:' prefixes removed from every XPath query, so KML files without a default namespace no longer raise
+  - relaxed the nokogiri dependency from '~> 1.12.0' to '~> 1.0'
+  - fixed the version spec, which asserted an outdated version with an identity matcher
 - v 0.1.4:
   - fixed kml files generation
   - fixed bug that swapped latitude and longitude in certain conversions from gpx to kml

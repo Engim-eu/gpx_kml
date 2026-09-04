@@ -12,6 +12,7 @@ module KML
       return unless correct_path?(file_path) && (File.size(file_path) < 10_000_000)
 
       @kml = Nokogiri::XML(File.open(file_path))
+      @kml.remove_namespaces!
       return unless valid?
 
       @file_name = File.basename(file_path)
@@ -30,7 +31,7 @@ module KML
     attr_reader :points, :routes, :tracks
 
     def kml?
-      !@kml.nil? && !@kml.xpath('/xmlns:kml').empty?
+      !@kml.nil? && !@kml.xpath('/kml').empty?
     end
 
     def valid?
@@ -38,19 +39,19 @@ module KML
     end
 
     def routes?
-      return true unless @kml.xpath('//xmlns:LinearRing').empty?
+      return true unless @kml.xpath('//LinearRing').empty?
 
       false
     end
 
     def tracks?
-      return true unless @kml.xpath('//xmlns:LineString').empty?
+      return true unless @kml.xpath('//LineString').empty?
 
       false
     end
 
     def points?
-      return true unless @kml.xpath('//xmlns:Point').empty?
+      return true unless @kml.xpath('//Point').empty?
 
       false
     end
@@ -63,7 +64,7 @@ module KML
 
     def _tracks
       t = []
-      @kml.xpath('//xmlns:LineString').each_with_index do |ls, i|
+      @kml.xpath('//LineString').each_with_index do |ls, i|
         t[i] = KML::Track.new ls
       end
       t
@@ -71,7 +72,7 @@ module KML
 
     def _routes
       r = []
-      @kml.xpath('//xmlns:LinearRing').each_with_index do |lr, i|
+      @kml.xpath('//LinearRing').each_with_index do |lr, i|
         r[i] = KML::Route.new lr
       end
       r
@@ -79,8 +80,8 @@ module KML
 
     def _points
       p = []
-      @kml.xpath('//xmlns:Point').each_with_index do |pt, i|
-        p[i] = KML::Point.new pt.xpath('./xmlns:coordinates/text()').to_s, self, pt
+      @kml.xpath('//Point').each_with_index do |pt, i|
+        p[i] = KML::Point.new pt.xpath('./coordinates/text()').to_s, self, pt
       end
       p
     end

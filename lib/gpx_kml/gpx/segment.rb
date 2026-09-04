@@ -8,7 +8,7 @@ module GPX
 
     def initialize(segment, track)
       return unless segment.is_a?(Nokogiri::XML::Element) && track.is_a?(GPX::Track)
-      return if segment.xpath('self::xmlns:trkseg').empty?
+      return if segment.xpath('self::trkseg').empty?
 
       @points = _points segment
       @track = track
@@ -20,7 +20,7 @@ module GPX
 
     def _points(segment)
       p = []
-      segment.xpath('./xmlns:trkpt').each_with_index do |tp, i|
+      segment.xpath('./trkpt').each_with_index do |tp, i|
         p[i] = Point.new(tp, self)
       end
       p

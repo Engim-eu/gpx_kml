@@ -13,12 +13,13 @@ module GPX
       return unless correct_path?(file_path) && (File.size(file_path) < 10_000_000)
 
       @gpx = Nokogiri::XML(File.open(file_path))
+      @gpx.remove_namespaces!
       return unless valid?
 
       @file_name = File.basename(file_path)
       @name = _name
-      @author = @gpx.xpath('/xmlns:gpx/xmlns:metadata/xmlns:author/xmlns:name/text()').to_s
-      @link = @gpx.xpath('/xmlns:gpx/xmlns:metadata/xmlns:link/@href').to_s
+      @author = @gpx.xpath('/gpx/metadata/author/name/text()').to_s
+      @link = @gpx.xpath('/gpx/metadata/link/@href').to_s
       @tracks = _tracks if tracks?
       @routes = _routes if routes?
       @points = _points if points?
@@ -34,7 +35,7 @@ module GPX
     attr_reader :points_length, :routes_length, :tracks_length
 
     def gpx?
-      !@gpx.nil? && !@gpx.xpath('/xmlns:gpx').empty?
+      !@gpx.nil? && !@gpx.xpath('/gpx').empty?
     end
 
     # For a gpx file to be valid it must only have a waypoint, a route or a track
@@ -43,26 +44,26 @@ module GPX
     end
 
     def routes?
-      return true unless @gpx.xpath('//xmlns:rte').empty?
+      return true unless @gpx.xpath('//rte').empty?
 
       false
     end
 
     def tracks?
-      return true unless @gpx.xpath('//xmlns:trk').empty?
+      return true unless @gpx.xpath('//trk').empty?
 
       false
     end
 
     def points?
-      return true unless @gpx.xpath('//xmlns:wpt').empty?
+      return true unless @gpx.xpath('//wpt').empty?
 
       false
     end
 
     def _name
       if valid?
-        name = @gpx.xpath('/xmlns:gpx/xmlns:metadata/xmlns:name/text()').to_s
+        name = @gpx.xpath('/gpx/metadata/name/text()').to_s
         return alt_name if name.empty?
 
         return name
@@ -72,7 +73,7 @@ module GPX
     end
 
     def description
-      return @gpx.xpath('//xmlns:metadata/xmlns:desc/text()').to_s if valid?
+      return @gpx.xpath('//metadata/desc/text()').to_s if valid?
 
       ''
     end
@@ -81,7 +82,7 @@ module GPX
 
     def _tracks
       t = []
-      @gpx.xpath('xmlns:gpx/xmlns:trk').each_with_index do |trk, i|
+      @gpx.xpath('gpx/trk').each_with_index do |trk, i|
         t[i] = GPX::Track.new trk
       end
       t
@@ -89,7 +90,7 @@ module GPX
 
     def _routes
       r = []
-      @gpx.xpath('xmlns:gpx/xmlns:rte').each_with_index do |rte, i|
+      @gpx.xpath('gpx/rte').each_with_index do |rte, i|
         r[i] = GPX::Route.new rte
       end
       r
@@ -97,7 +98,7 @@ module GPX
 
     def _points
       p = []
-      @gpx.xpath('xmlns:gpx/xmlns:wpt').each_with_index do |wpt, i|
+      @gpx.xpath('gpx/wpt').each_with_index do |wpt, i|
         p[i] = GPX::Point.new wpt, self
       end
       p
@@ -127,10 +128,10 @@ module GPX
 
     def alt_name
       node = nil
-      node = @gpx.xpath('//xmlns:wpt')[0] if points?
-      node = @gpx.xpath('//xmlns:trk')[0] if tracks?
-      node = @gpx.xpath('//xmlns:rte')[0] if routes?
-      return node.xpath('./xmlns:name/text()').to_s unless node.nil?
+      node = @gpx.xpath('//wpt')[0] if points?
+      node = @gpx.xpath('//trk')[0] if tracks?
+      node = @gpx.xpath('//rte')[0] if routes?
+      return node.xpath('./name/text()').to_s unless node.nil?
 
       ''
     end

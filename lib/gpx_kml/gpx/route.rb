@@ -6,12 +6,12 @@ module GPX
   # Docu
   class Route
     def initialize(route)
-      return unless route.is_a?(Nokogiri::XML::Element) && !route.xpath('self::xmlns:rte').empty?
+      return unless route.is_a?(Nokogiri::XML::Element) && !route.xpath('self::rte').empty?
 
-      @name = route.xpath('./xmlns:name/text()').to_s
-      @number = route.xpath('./xmlns:number/text()').to_s
-      @description = route.xpath('./xmlns:desc/text()').to_s
-      @link = route.xpath('./xmlns:link/@href').to_s
+      @name = route.xpath('./name/text()').to_s
+      @number = route.xpath('./number/text()').to_s
+      @description = route.xpath('./desc/text()').to_s
+      @link = route.xpath('./link/@href').to_s
       @points = _points route
     end
 
@@ -21,7 +21,7 @@ module GPX
 
     def _points(route)
       route_points = []
-      route.xpath('./xmlns:rtept').each_with_index do |rp, i|
+      route.xpath('./rtept').each_with_index do |rp, i|
         route_points[i] = Point.new(rp, self)
       end
       route_points

@@ -6,14 +6,14 @@ module GPX
 
     def initialize(point, father)
       return unless point.is_a? Nokogiri::XML::Element
-      return if point.xpath('self::*[self::xmlns:wpt or self::xmlns:rtept or self::xmlns:trkpt]').empty?
+      return if point.xpath('self::*[self::wpt or self::rtept or self::trkpt]').empty?
 
       @longitude = point.xpath('@lon').to_s
       @latitude = point.xpath('@lat').to_s
-      @elevation = point.xpath('./xmlns:ele/text()').to_s
-      @name = point.xpath('./xmlns:name/text()').to_s
-      @description = point.xpath('./xmlns:desc/text()').to_s
-      @link = point.xpath('./xmlns:link/@href').to_s
+      @elevation = point.xpath('./ele/text()').to_s
+      @name = point.xpath('./name/text()').to_s
+      @description = point.xpath('./desc/text()').to_s
+      @link = point.xpath('./link/@href').to_s
       return unless valid_father? father
 
       @father = father

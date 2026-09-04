@@ -6,12 +6,12 @@ module GPX
   # Docu
   class Track
     def initialize(track)
-      return unless track.is_a?(Nokogiri::XML::Element) && !track.xpath('self::xmlns:trk').empty?
+      return unless track.is_a?(Nokogiri::XML::Element) && !track.xpath('self::trk').empty?
 
-      @name = track.xpath('./xmlns:name/text()').to_s
-      @number = track.xpath('./xmlns:number/text()').to_s
-      @description = track.xpath('./xmlns:desc/text()').to_s
-      @link = track.xpath('./xmlns:link/@href').to_s
+      @name = track.xpath('./name/text()').to_s
+      @number = track.xpath('./number/text()').to_s
+      @description = track.xpath('./desc/text()').to_s
+      @link = track.xpath('./link/@href').to_s
       @segments = _segments track
     end
 
@@ -21,7 +21,7 @@ module GPX
 
     def _segments(track)
       track_segment = []
-      track.xpath('./xmlns:trkseg').each_with_index do |ts, i|
+      track.xpath('./trkseg').each_with_index do |ts, i|
         track_segment[i] = Segment.new(ts, self)
       end
       track_segment

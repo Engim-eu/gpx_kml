@@ -4,7 +4,7 @@
 
 RSpec.describe GPXKML::GpxKml do
   it 'has a version number' do
-    expect(GPXKML::VERSION).to be '0.1.3'
+    expect(GPXKML::VERSION).to eq '0.1.5'
   end
 
   it 'checks if the imported file is actually a gpx' do

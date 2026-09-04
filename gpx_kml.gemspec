@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rake', '~> 12.0'
 
   # XML parsing
-  spec.add_dependency 'nokogiri', '~>1.12.0'
+  spec.add_dependency 'nokogiri', '~>1.0'
 
   # Gem testing
   spec.add_development_dependency 'rspec', '~>3.0'
