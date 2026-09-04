@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require 'gpx_kml/coordinate'
+
 module GPX
   # Docu
   class Point
+    include GPXKML::Coordinate
 
     def initialize(point, father)
       return unless point.is_a? Nokogiri::XML::Element
@@ -21,6 +24,12 @@ module GPX
 
 
     attr_reader :longitude, :latitude, :link, :name, :description, :father, :elevation
+
+    # False when the point carries no usable coordinates, which is what a gpx
+    # written by a broken exporter looks like: <trkpt lat="" lon=""/>.
+    def valid?
+      longitude?(@longitude) && latitude?(@latitude)
+    end
 
     private
 

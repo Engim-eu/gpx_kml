@@ -70,62 +70,58 @@ module CONVERTER
     end
 
     def self.kml_routes(xml, gpx)
-      if gpx.routes?
-        gpx.routes.each do |r|
-          xml.Placemark do
-            xml.LinearRing do
-              xml.extrude('0')
-              xml.tassellate('0')
-              xml.altitudeMode('clampToGroud')
-              s = ''
-              r.points.each do |p|
-                s = if p.elevation.nil? || p.elevation.empty?
-                      s + "#{p.longitude},#{p.latitude} "
-                    else
-                      s + "#{p.longitude},#{p.latitude},#{p.elevation} "
-                    end
-              end
-              xml.coordinates(s[0..-2])
-            end
+      return unless gpx.routes?
+
+      gpx.routes.each do |r|
+        coordinates = coordinates_of(r.points)
+        next if coordinates.empty?
+
+        xml.Placemark do
+          xml.LinearRing do
+            xml.extrude('0')
+            xml.tassellate('0')
+            xml.altitudeMode('clampToGroud')
+            xml.coordinates(coordinates)
           end
         end
       end
     end
 
     def self.kml_tracks(xml, gpx)
-      if gpx.tracks?
-        gpx.tracks.each do |t|
-          xml.Placemark do
-            xml.LineString do
-              xml.extrude('0')
-              xml.tassellate('0')
-              xml.altitudeMode('clampToGroud')
-              s = ''
-              points = []
-              t.segments.each do |sg|
-                sg.points.each do |p|
-                  points = points << p
-                end
-              end
-              points.each do |p|
-                next if p.nil?
+      return unless gpx.tracks?
 
-                s = if p.elevation.nil? || p.elevation.empty?
-                      s + "#{p.longitude},#{p.latitude} "
-                    else
-                      s + "#{p.longitude},#{p.latitude},#{p.elevation} "
-                    end
-              end
-              xml.coordinates(s[0..-2])
-            end
+      gpx.tracks.each do |t|
+        coordinates = coordinates_of(t.segments.flat_map(&:points))
+        next if coordinates.empty?
+
+        xml.Placemark do
+          xml.LineString do
+            xml.extrude('0')
+            xml.tassellate('0')
+            xml.altitudeMode('clampToGroud')
+            xml.coordinates(coordinates)
           end
         end
       end
     end
 
+    # The 'lon,lat[,ele]' tuples of the points that carry usable coordinates,
+    # in the space separated form KML expects.
+    def self.coordinates_of(points)
+      points.compact.select(&:valid?).map do |p|
+        if p.elevation.nil? || p.elevation.empty?
+          "#{p.longitude},#{p.latitude}"
+        else
+          "#{p.longitude},#{p.latitude},#{p.elevation}"
+        end
+      end.join(' ')
+    end
+
     def self.kml_points(xml, gpx)
       if gpx.points?
         gpx.points.each do |p|
+          next if p.nil? || !p.valid?
+
           xml.Point do
             xml.extrude('0')
             xml.altitudeMode('clampToGroud')

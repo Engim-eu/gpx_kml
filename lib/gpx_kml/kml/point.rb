@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
+require 'gpx_kml/coordinate'
 require 'gpx_kml/kml'
 require 'gpx_kml/kml/track'
 require 'gpx_kml/kml/route'
@@ -8,15 +9,7 @@ require 'gpx_kml/kml/route'
 module KML
   # Docu
   class Point
-    # A single number of a KML coordinate tuple: an optionally signed decimal.
-    # Exponent notation is deliberately left out: GPX 1.1 types latitude and
-    # longitude as xsd:decimal, which forbids it, so a coordinate written as
-    # '1.0e1' could not be converted without rewriting the value.
-    NUMBER = /\A[+-]?(?:\d+(?:\.\d*)?|\.\d+)\z/
-
-    # Ranges KML defines for the tuple longitude,latitude[,altitude].
-    LONGITUDE_RANGE = (-180.0..180.0)
-    LATITUDE_RANGE = (-90.0..90.0)
+    include GPXKML::Coordinate
 
     def initialize(coord, father, node)
       return unless valid_father?(father) && node.is_a?(Nokogiri::XML::Element)
@@ -52,15 +45,10 @@ module KML
       return nil unless coord.is_a?(String) && coord.count(',') <= 2
 
       longitude, latitude, elevation = coord.strip.split(',').map(&:strip)
-      return nil if longitude.nil? || latitude.nil?
-      return nil unless in_range?(longitude, LONGITUDE_RANGE) && in_range?(latitude, LATITUDE_RANGE)
-      return nil unless elevation.nil? || NUMBER.match?(elevation)
+      return nil unless longitude?(longitude) && latitude?(latitude)
+      return nil unless elevation.nil? || number?(elevation)
 
       [longitude, latitude, elevation]
-    end
-
-    def in_range?(number, range)
-      NUMBER.match?(number) && range.cover?(number.to_f)
     end
 
     def _name
