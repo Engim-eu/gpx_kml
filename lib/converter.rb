@@ -49,7 +49,7 @@ module CONVERTER
       output_path = output_path[0..-2] if output_path[-1].eql?('/')
       gpx = Nokogiri::XML::Builder.new do |xml|
         xml.gpx('version': '1.1', 'creator': 'https://www.github.com/engim-eu/gpx_kml',
-                'xmlns': 'https://www.topografix.com/GPX/1/1', 'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance') do
+                'xmlns': 'http://www.topografix.com/GPX/1/1', 'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance') do
           xml.metadata do
             xml.name(kml.file_name[0..-5])
           end

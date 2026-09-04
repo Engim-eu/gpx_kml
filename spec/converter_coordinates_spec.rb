@@ -29,4 +29,8 @@ RSpec.describe 'Converter coordinates' do
     expect(document.xpath('//trkpt').length).to eq 3
     expect(kml.tracks[0].points.length).to eq 4
   end
+
+  it 'declares the GPX 1.1 namespace' do
+    expect(Nokogiri::XML(gpx).root.namespace.href).to eq 'http://www.topografix.com/GPX/1/1'
+  end
 end
