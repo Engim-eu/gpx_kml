@@ -142,7 +142,7 @@ module CONVERTER
     def self.gpx_points(xml, kml)
       if kml.points?
         kml.points.each do |p|
-          next if p.nil?
+          next if p.nil? || !p.valid?
 
           xml.wpt('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
             xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
@@ -164,7 +164,7 @@ module CONVERTER
             xml.desc("author= #{r.author}") unless r.author.nil? || r.author.empty?
             xml.link('href': r.link) unless r.link.nil? || r.link.empty?
             r.points.each do |p|
-              next if p.nil?
+              next if p.nil? || !p.valid?
 
               xml.rtept('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
                 xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
@@ -188,7 +188,7 @@ module CONVERTER
             xml.link('href': t.link) unless t.link.nil? || t.link.empty?
             xml.trkseg do
               t.points.each do |p|
-                next if p.nil?
+                next if p.nil? || !p.valid?
 
                 xml.trkpt('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
                   xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
