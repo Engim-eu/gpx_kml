@@ -44,18 +44,21 @@ module GPX
     end
 
     def routes?
+      return false if @gpx.nil?
       return true unless @gpx.xpath('//rte').empty?
 
       false
     end
 
     def tracks?
+      return false if @gpx.nil?
       return true unless @gpx.xpath('//trk').empty?
 
       false
     end
 
     def points?
+      return false if @gpx.nil?
       return true unless @gpx.xpath('//wpt').empty?
 
       false

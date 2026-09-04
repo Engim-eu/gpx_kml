@@ -26,6 +26,15 @@ module GPXKML
       within?(value, LATITUDE_RANGE)
     end
 
+    # The value as it has to be handed on: without the whitespace a document may
+    # carry around it, and nil when it is not a number at all. Writing a value
+    # back verbatim is not safe — a space inside it separates tuples in a KML
+    # <coordinates> element, so it would not corrupt one coordinate but every
+    # coordinate after it.
+    def normalized_number(value)
+      value.strip if number?(value)
+    end
+
     private
 
     def within?(value, range)

@@ -39,18 +39,21 @@ module KML
     end
 
     def routes?
+      return false if @kml.nil?
       return true unless @kml.xpath('//LinearRing').empty?
 
       false
     end
 
     def tracks?
+      return false if @kml.nil?
       return true unless @kml.xpath('//LineString').empty?
 
       false
     end
 
     def points?
+      return false if @kml.nil?
       return true unless @kml.xpath('//Point').empty?
 
       false

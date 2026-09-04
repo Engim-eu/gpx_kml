@@ -46,9 +46,8 @@ module KML
 
       longitude, latitude, elevation = coord.strip.split(',').map(&:strip)
       return nil unless longitude?(longitude) && latitude?(latitude)
-      return nil unless elevation.nil? || number?(elevation)
 
-      [longitude, latitude, elevation]
+      [longitude, latitude, normalized_number(elevation)]
     end
 
     def _name

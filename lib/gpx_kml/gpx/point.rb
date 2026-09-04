@@ -11,9 +11,9 @@ module GPX
       return unless point.is_a? Nokogiri::XML::Element
       return if point.xpath('self::*[self::wpt or self::rtept or self::trkpt]').empty?
 
-      @longitude = point.xpath('@lon').to_s
-      @latitude = point.xpath('@lat').to_s
-      @elevation = point.xpath('./ele/text()').to_s
+      @longitude = point.xpath('@lon').to_s.strip
+      @latitude = point.xpath('@lat').to_s.strip
+      @elevation = normalized_number(point.xpath('./ele/text()').to_s) || ''
       @name = point.xpath('./name/text()').to_s
       @description = point.xpath('./desc/text()').to_s
       @link = point.xpath('./link/@href').to_s

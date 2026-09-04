@@ -38,4 +38,18 @@ RSpec.describe 'File paths' do
     expect(GPXKML::Kml.new(File.join(@dir, 'missing.kml')).valid?).to be false
     expect(GPXKML::Gpx.new(@dir).valid?).to be false
   end
+
+  it 'answers every predicate of an empty object instead of raising' do
+    gpx = GPXKML::Gpx.new(File.join(@dir, 'missing.gpx'))
+    expect(gpx.gpx?).to be false
+    expect(gpx.tracks?).to be false
+    expect(gpx.routes?).to be false
+    expect(gpx.points?).to be false
+
+    kml = GPXKML::Kml.new(File.join(@dir, 'missing.kml'))
+    expect(kml.kml?).to be false
+    expect(kml.tracks?).to be false
+    expect(kml.routes?).to be false
+    expect(kml.points?).to be false
+  end
 end

@@ -59,8 +59,18 @@ RSpec.describe 'Point coordinates' do
 
     it 'rejects non numeric components' do
       expect(point('abc,def')).not_to be_valid
-      expect(point('9.185982,45.465422,abc')).not_to be_valid
       expect(point('0x10,45.465422')).not_to be_valid
+    end
+
+    it 'drops an altitude that is not a number, keeping the position' do
+      expect(point('9.185982,45.465422,abc')).to be_valid
+      expect(point('9.185982,45.465422,abc').elevation).to be_nil
+    end
+
+    it 'drops the whitespace a document may carry around a component' do
+      expect(point(' 9.185982 , 45.465422 , 306.8 ').longitude).to eq '9.185982'
+      expect(point(' 9.185982 , 45.465422 , 306.8 ').latitude).to eq '45.465422'
+      expect(point(' 9.185982 , 45.465422 , 306.8 ').elevation).to eq '306.8'
     end
 
     it 'rejects coordinates outside the ranges KML defines' do
