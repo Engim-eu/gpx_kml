@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gpx_kml (0.1.5)
+    gpx_kml (0.1.6)
       nokogiri (~> 1.0)
       rake (~> 12.0)
 

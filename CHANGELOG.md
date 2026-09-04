@@ -1,4 +1,14 @@
 ### V 0.1.x
+- v 0.1.6:
+  - fixed KML::Point rejecting valid coordinate tuples: integer elevations ('lon,lat,0'), negative longitudes and latitudes, and integer longitudes and latitudes were all discarded, leaving the point with no coordinates and making kml_to_gpx emit '<trkpt lat="" lon=""/>'
+  - a single malformed tuple no longer voids the whole point, it is skipped and the rest of the geometry survives
+  - added Point#valid? on both the KML and the GPX side, so a caller can tell an unusable point from an empty one
+  - coordinate values are now stripped of the whitespace a document may carry around them, and an elevation that is not a number is left out instead of being written back verbatim: a space inside a value separates tuples in a KML '<coordinates>' element, so it used to corrupt every coordinate after it
+  - a broken altitude no longer costs the whole point, in either direction: the position survives and only the altitude is dropped
+  - Gpx and Kml built from an unreadable path now answer tracks?, routes? and points? with false instead of raising NoMethodError on a nil document
+  - the converter no longer writes points it could not read, in either direction, and skips a placemark left with no usable point instead of emitting an empty '<coordinates/>'
+  - fixed the GPX 1.1 namespace, which was declared over https and therefore was not the namespace GPX defines
+  - Gpx and Kml now decide what a file is from its root element instead of its extension, so an uppercase '.GPX' is no longer skipped in silence, and a path that is not a file no longer raises Errno::ENOENT
 - v 0.1.5:
   - fixed Nokogiri XPath namespace error: namespaces are now stripped after parsing and the 'xmlns:' and 'atom:' prefixes removed from every XPath query, so KML files without a default namespace no longer raise
   - relaxed the nokogiri dependency from '~> 1.12.0' to '~> 1.0'
