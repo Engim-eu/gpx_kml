@@ -58,8 +58,12 @@ module KML
 
     private
 
+    # Whether the path can be read at all. What the file actually is gets
+    # decided from its root element by #kml?, not from its extension: an
+    # uppercase '.KML' is an ordinary file name, and it is what a Rack
+    # tempfile keeps on upload.
     def correct_path?(path)
-      path.instance_of?(String) && (path.end_with?('.kml') || path.end_with?('.xml') || !path.include?('.'))
+      path.instance_of?(String) && File.file?(path)
     end
 
     def _tracks
