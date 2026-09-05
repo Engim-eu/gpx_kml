@@ -44,18 +44,21 @@ module GPX
     end
 
     def routes?
+      return false if @gpx.nil?
       return true unless @gpx.xpath('//rte').empty?
 
       false
     end
 
     def tracks?
+      return false if @gpx.nil?
       return true unless @gpx.xpath('//trk').empty?
 
       false
     end
 
     def points?
+      return false if @gpx.nil?
       return true unless @gpx.xpath('//wpt').empty?
 
       false
@@ -122,8 +125,12 @@ module GPX
       @points.length
     end
 
+    # Whether the path can be read at all. What the file actually is gets
+    # decided from its root element by #gpx?, not from its extension: an
+    # uppercase '.GPX' is an ordinary file name, and it is what a Rack
+    # tempfile keeps on upload.
     def correct_path?(path)
-      path.instance_of?(String) && (path.end_with?('.gpx') || path.end_with?('.xml') || !path.include?('.'))
+      path.instance_of?(String) && File.file?(path)
     end
 
     def alt_name

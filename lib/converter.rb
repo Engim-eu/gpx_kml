@@ -49,7 +49,7 @@ module CONVERTER
       output_path = output_path[0..-2] if output_path[-1].eql?('/')
       gpx = Nokogiri::XML::Builder.new do |xml|
         xml.gpx('version': '1.1', 'creator': 'https://www.github.com/engim-eu/gpx_kml',
-                'xmlns': 'https://www.topografix.com/GPX/1/1', 'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance') do
+                'xmlns': 'http://www.topografix.com/GPX/1/1', 'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance') do
           xml.metadata do
             xml.name(kml.file_name[0..-5])
           end
@@ -70,62 +70,58 @@ module CONVERTER
     end
 
     def self.kml_routes(xml, gpx)
-      if gpx.routes?
-        gpx.routes.each do |r|
-          xml.Placemark do
-            xml.LinearRing do
-              xml.extrude('0')
-              xml.tassellate('0')
-              xml.altitudeMode('clampToGroud')
-              s = ''
-              r.points.each do |p|
-                s = if p.elevation.nil? || p.elevation.empty?
-                      s + "#{p.longitude},#{p.latitude} "
-                    else
-                      s + "#{p.longitude},#{p.latitude},#{p.elevation} "
-                    end
-              end
-              xml.coordinates(s[0..-2])
-            end
+      return unless gpx.routes?
+
+      gpx.routes.each do |r|
+        coordinates = coordinates_of(r.points)
+        next if coordinates.empty?
+
+        xml.Placemark do
+          xml.LinearRing do
+            xml.extrude('0')
+            xml.tassellate('0')
+            xml.altitudeMode('clampToGroud')
+            xml.coordinates(coordinates)
           end
         end
       end
     end
 
     def self.kml_tracks(xml, gpx)
-      if gpx.tracks?
-        gpx.tracks.each do |t|
-          xml.Placemark do
-            xml.LineString do
-              xml.extrude('0')
-              xml.tassellate('0')
-              xml.altitudeMode('clampToGroud')
-              s = ''
-              points = []
-              t.segments.each do |sg|
-                sg.points.each do |p|
-                  points = points << p
-                end
-              end
-              points.each do |p|
-                next if p.nil?
+      return unless gpx.tracks?
 
-                s = if p.elevation.nil? || p.elevation.empty?
-                      s + "#{p.longitude},#{p.latitude} "
-                    else
-                      s + "#{p.longitude},#{p.latitude},#{p.elevation} "
-                    end
-              end
-              xml.coordinates(s[0..-2])
-            end
+      gpx.tracks.each do |t|
+        coordinates = coordinates_of(t.segments.flat_map(&:points))
+        next if coordinates.empty?
+
+        xml.Placemark do
+          xml.LineString do
+            xml.extrude('0')
+            xml.tassellate('0')
+            xml.altitudeMode('clampToGroud')
+            xml.coordinates(coordinates)
           end
         end
       end
     end
 
+    # The 'lon,lat[,ele]' tuples of the points that carry usable coordinates,
+    # in the space separated form KML expects.
+    def self.coordinates_of(points)
+      points.compact.select(&:valid?).map do |p|
+        if p.elevation.nil? || p.elevation.empty?
+          "#{p.longitude},#{p.latitude}"
+        else
+          "#{p.longitude},#{p.latitude},#{p.elevation}"
+        end
+      end.join(' ')
+    end
+
     def self.kml_points(xml, gpx)
       if gpx.points?
         gpx.points.each do |p|
+          next if p.nil? || !p.valid?
+
           xml.Point do
             xml.extrude('0')
             xml.altitudeMode('clampToGroud')
@@ -142,7 +138,7 @@ module CONVERTER
     def self.gpx_points(xml, kml)
       if kml.points?
         kml.points.each do |p|
-          next if p.nil?
+          next if p.nil? || !p.valid?
 
           xml.wpt('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
             xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
@@ -164,7 +160,7 @@ module CONVERTER
             xml.desc("author= #{r.author}") unless r.author.nil? || r.author.empty?
             xml.link('href': r.link) unless r.link.nil? || r.link.empty?
             r.points.each do |p|
-              next if p.nil?
+              next if p.nil? || !p.valid?
 
               xml.rtept('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
                 xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?
@@ -188,7 +184,7 @@ module CONVERTER
             xml.link('href': t.link) unless t.link.nil? || t.link.empty?
             xml.trkseg do
               t.points.each do |p|
-                next if p.nil?
+                next if p.nil? || !p.valid?
 
                 xml.trkpt('lat': p.latitude.to_s, 'lon': p.longitude.to_s) do
                   xml.ele(p.elevation.to_s) unless p.elevation.nil? || p.elevation.empty?

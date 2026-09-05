@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'nokogiri'
+require 'gpx_kml/coordinate'
 require 'gpx_kml/kml'
 require 'gpx_kml/kml/track'
 require 'gpx_kml/kml/route'
@@ -8,17 +9,17 @@ require 'gpx_kml/kml/route'
 module KML
   # Docu
   class Point
-    def initialize(coord, father, node)
-      re = Regexp.new('^ ?[0-9]+\.[0-9]+,[0-9]+\.[0-9]+(,[0-9]+\.[0-9]+)? ?$')
+    include GPXKML::Coordinate
 
-      return unless valid_father?(father) && re.match?(coord) && node.is_a?(Nokogiri::XML::Element)
+    def initialize(coord, father, node)
+      return unless valid_father?(father) && node.is_a?(Nokogiri::XML::Element)
       return if node.xpath('self::*[self::LineString or self::Point or self::LinearRing]').empty?
 
+      parsed = parse(coord)
+      return if parsed.nil?
+
       @father = father
-      coord = coord.split(',')
-      @longitude = coord[0]
-      @latitude = coord[1]
-      @elevation = coord[2] if coord.length == 3
+      @longitude, @latitude, @elevation = parsed
       @node = node
       # Name is looked up in the ancestor of the node that compose this point
       @name = _name
@@ -30,7 +31,24 @@ module KML
 
     attr_reader :latitude, :longitude, :elevation, :name, :father, :link, :author
 
+    # False when the coordinate tuple could not be read, so that a caller can
+    # tell an unusable point from one that merely looks empty.
+    def valid?
+      !@longitude.nil? && !@latitude.nil?
+    end
+
     private
+
+    # Splits a 'longitude,latitude[,altitude]' tuple and returns its components
+    # as they are written in the document, or nil when it is not a coordinate.
+    def parse(coord)
+      return nil unless coord.is_a?(String) && coord.count(',') <= 2
+
+      longitude, latitude, elevation = coord.strip.split(',').map(&:strip)
+      return nil unless longitude?(longitude) && latitude?(latitude)
+
+      [longitude, latitude, normalized_number(elevation)]
+    end
 
     def _name
       elem = @node.xpath('.')

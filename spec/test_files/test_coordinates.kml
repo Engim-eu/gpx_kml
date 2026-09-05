@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+        <name>ZONA 3</name>
+        <Placemark>
+            <name>PUNTO</name>
+            <Point>
+                <coordinates>9.185982,45.465422,0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>TRACCIA</name>
+            <LineString>
+                <coordinates>10.9672,44.6598,0 -74.006,40.7128,0 12,42 abc,def</coordinates>
+            </LineString>
+        </Placemark>
+        <Placemark>
+            <name>ANELLO</name>
+            <LinearRing>
+                <coordinates>10.9672,-44.6598,123 10.97,-44.66,123 10.9672,-44.6598,123</coordinates>
+            </LinearRing>
+        </Placemark>
+    </Document>
+</kml>

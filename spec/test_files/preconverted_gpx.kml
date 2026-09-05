@@ -23,14 +23,6 @@
         <extrude>0</extrude>
         <tassellate>0</tassellate>
         <altitudeMode>clampToGroud</altitudeMode>
-        <coordinates/>
-      </LineString>
-    </Placemark>
-    <Placemark>
-      <LineString>
-        <extrude>0</extrude>
-        <tassellate>0</tassellate>
-        <altitudeMode>clampToGroud</altitudeMode>
         <coordinates>11.871986,46.075041,764.3 11.914161,46.04676,335.0 11.914186,46.046712</coordinates>
       </LineString>
     </Placemark>
